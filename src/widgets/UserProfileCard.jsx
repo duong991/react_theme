@@ -8,6 +8,12 @@ import dayjs from "dayjs";
 import avatar from "@assets/avatar.webp";
 
 const UserProfileCard = () => {
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        window.location.reload();
+    };
+
     return (
         <Spring
             className="card flex flex-col items-center justify-center"
@@ -34,7 +40,10 @@ const UserProfileCard = () => {
             <p className="subheading-2 mt-6 mb-[18px]">
                 last visit {dayjs().format("DD/MM/YYYY")}
             </p>
-            <button className="btn btn--secondary w-full md:max-w-[280px]">
+            <button
+                className="btn btn--secondary w-full md:max-w-[280px]"
+                onClick={handleLogout}
+            >
                 Log Out
             </button>
         </Spring>

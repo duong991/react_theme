@@ -39,7 +39,7 @@ axiosInstance.interceptors.response.use(
         }
 
         if (_response?.statusCode !== 200) {
-            throw new Error(_response.error);
+            throw new Error(_response.message);
         }
 
         return response;

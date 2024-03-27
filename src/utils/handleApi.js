@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import axiosInstance from "@config/api";
+import Qs from "qs";
 
 export async function callService(service, data, isFormData = false) {
     try {
@@ -17,10 +18,15 @@ export async function callService(service, data, isFormData = false) {
 }
 async function sendRequest(method, path, data) {
     try {
+        const { body, params, query } = data;
+
         let requestConfig = {
             method,
             url: path,
-            data,
+            data: body,
+            params: params,
+            paramsSerializer: (params) =>
+                Qs.stringify(params, { arrayFormat: "brackets" }),
         };
         return (await axiosInstance(requestConfig)).data;
     } catch (error) {

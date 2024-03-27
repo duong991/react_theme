@@ -17,14 +17,9 @@ class AuthService {
          */
         this.services = [
             {
-                path: "/auth/login",
+                path: "/admin/transaction",
                 method: "post",
-                nameFunction: "handleLogin",
-            },
-            {
-                path: "/auth/logout",
-                method: "post",
-                nameFunction: "handleLogout",
+                nameFunction: "fetchTransaction",
             },
         ];
     }
@@ -36,7 +31,7 @@ class AuthService {
      * @return {Promise} A promise that resolves to the server's response.
      * @throws {Error} If the 'handleLogin' service is not found.
      */
-    async handleLogin(data) {
+    async fetchTransaction(data) {
         const service = this.getService("handleLogin");
 
         if (!service) {
@@ -44,25 +39,6 @@ class AuthService {
         }
 
         const response = await callService(service, data, true);
-        return response;
-    }
-
-    /**
-     * Handles the logout process.
-     *
-     * @param {Object} data - The data to send to the server.
-     * @return {Promise} A promise that resolves to the server's response.
-     * @throws {Error} If the 'handleLogout' service is not found.
-     */
-    async handleLogout(data) {
-        const service = this.getService("handleLogout");
-
-        if (!service) {
-            throw new Error("Service 'handleLogout' not found");
-        }
-
-        const response = await callService(service, data);
-
         return response;
     }
 

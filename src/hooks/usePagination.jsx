@@ -1,11 +1,11 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
 
 const usePagination = (data, itemsPerPage = 10) => {
     const [currentPage, setCurrentPage] = useState(0);
     const maxPage = Math.ceil(data.length / itemsPerPage);
 
     const currentItems = () => {
-        const begin = (currentPage) * itemsPerPage;
+        const begin = currentPage * itemsPerPage;
         const end = begin + itemsPerPage;
         return data.slice(begin, end);
     };
@@ -30,19 +30,31 @@ const usePagination = (data, itemsPerPage = 10) => {
     const goToPage = (page) => {
         const pageNumber = Math.max(0, page);
         setCurrentPage(() => Math.min(pageNumber, maxPage));
-    }
+    };
 
     const showingOf = () => {
-        const begin = (currentPage) * itemsPerPage;
-        const end = data.length > itemsPerPage ? begin + itemsPerPage : data.length;
-        return data.length > 0 ?
+        const begin = currentPage * itemsPerPage;
+        const end =
+            data.length > itemsPerPage ? begin + itemsPerPage : data.length;
+        return data.length > 0 ? (
             <>
                 <span className="font-semibold">{end}</span>/{data.length}
             </>
-            : '';
-    }
+        ) : (
+            ""
+        );
+    };
 
-    return {next, prev, goToPage, showingOf, currentItems, currentPage, setCurrentPage, maxPage};
-}
+    return {
+        next,
+        prev,
+        goToPage,
+        showingOf,
+        currentItems,
+        currentPage,
+        setCurrentPage,
+        maxPage,
+    };
+};
 
-export default usePagination
+export default usePagination;

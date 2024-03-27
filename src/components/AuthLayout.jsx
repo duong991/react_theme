@@ -34,7 +34,9 @@ const AuthLayout = () => {
 
     const onSubmit = async (formData) => {
         // get data of form
-        const data = formData;
+        const data = {
+            body: formData,
+        };
         // call api
         const result = await authService.handleLogin(data);
         console.log("🚀 ~ onSubmit ~ result:", result);
